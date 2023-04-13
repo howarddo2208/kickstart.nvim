@@ -27,7 +27,7 @@ require('gitsigns').setup {
     map('n', '<leader>gR', gs.reset_buffer, 'Reset buffer')
     map('n', '<leader>gp', gs.preview_hunk, 'Preview hunk')
     map('n', '<leader>gb', function() gs.blame_line { full = true } end, 'Blame line')
-    map('n', '<leader>tb', gs.toggle_current_line_blame, 'Toggle current line blame')
+    map('n', '<leader>ub', gs.toggle_current_line_blame, 'Toggle current line blame')
     map('n', '<leader>gd', gs.diffthis, 'Diff this hunk against index')
     map('n', '<leader>gD', function() gs.diffthis('~') end, 'Diff this hunk against working tree')
     map('n', '<leader>gt', gs.toggle_deleted, 'Toggle deleted')
