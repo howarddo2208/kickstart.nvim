@@ -1,6 +1,13 @@
 -- DEFAULT OPTIONS
 vim.opt.relativenumber = true
 
+-- AUTOCOMMANDS
+
+-- autosave on focus lost
+vim.api.nvim_create_autocmd({ 'FocusLost' }, {
+  command = 'silent! wa'
+})
+
 -- KEYMAPS
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
@@ -29,3 +36,8 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window w
 -- quit
 map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit all" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit current window" })
+
+-- saving with Ctrl+S
+vim.api.nvim_set_keymap("i", "<C-s>", "<ESC>:w<CR>a", {noremap = true, desc = 'save buffer'})
+vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {noremap = true, desc = 'save buffer'})
+
