@@ -4,6 +4,8 @@ return {
   opts = { --[[ things you want to change go here]] },
   config = function()
     local Terminal = require('toggleterm.terminal').Terminal
+
+    -- LAZYGIT TOGGLE TERM
     local lazygit  = Terminal:new({
       cmd = "lazygit",
       dir = "git_dir",
@@ -26,6 +28,25 @@ return {
       lazygit:toggle()
     end
 
-    vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true, desc = "Lazygit" })
+    vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>",
+      { noremap = true, silent = true, desc = "Lazygit" })
+
+    -- FLOAT TOGGLE TERM
+    local floatterm = Terminal:new({
+      cmd = vim.o.shell,
+      direction = "float",
+      float_opts = {
+      },
+    })
+
+    function _floatterm_toggle()
+      floatterm:toggle()
+    end
+
+    -- Keymap for floatterm
+    vim.keymap.set({ 'n', 't' }, "<C-\\>", "<cmd>lua _floatterm_toggle()<CR>",
+      { noremap = true, silent = true, desc = "Floating Terminal" })
   end,
 }
+
+-- @todo: multiple toggleterm
