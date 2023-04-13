@@ -16,6 +16,12 @@ wk.register({
   },
   w = {
     name = 'Workplace+'
+  },
+  u = {
+    name = 'Toggle+'
+  },
+  t = {
+    name = 'Telescope+'
   }
 }, { prefix = '<leader>' })
 wk.setup()
