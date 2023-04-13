@@ -1,10 +1,10 @@
 -- Move to previous/next
-vim.keymap.set('n', '<A-,>', ':BufferPrevious<CR>', { desc = 'Move to previous buffer' })
-vim.keymap.set('n', '<A-.>', ':BufferNext<CR>', { desc = 'Move to next buffer' })
+vim.keymap.set('n', '<A-h>', ':BufferPrevious<CR>', { desc = 'Move to previous buffer' })
+vim.keymap.set('n', '<A-l>', ':BufferNext<CR>', { desc = 'Move to next buffer' })
 
 -- Re-order to previous/next
-vim.keymap.set('n', '<A-<>', ':BufferMovePrevious<CR>', { desc = 'Re-order buffer to previous' })
-vim.keymap.set('n', '<A->>', ':BufferMoveNext<CR>', { desc = 'Re-order buffer to next' })
+vim.keymap.set('n', '<A-H>', ':BufferMovePrevious<CR>', { desc = 'Re-order buffer to previous' })
+vim.keymap.set('n', '<A-L>', ':BufferMoveNext<CR>', { desc = 'Re-order buffer to next' })
 
 -- Goto buffer in position...
 vim.keymap.set('n', '<A-1>', ':BufferGoto 1<CR>', { desc = 'Go to buffer 1' })
@@ -19,10 +19,10 @@ vim.keymap.set('n', '<A-9>', ':BufferGoto 9<CR>', { desc = 'Go to buffer 9' })
 vim.keymap.set('n', '<A-0>', ':BufferLast<CR>', { desc = 'Go to last buffer' })
 
 -- Pin/unpin buffer
-vim.keymap.set('n', '<A-p>', ':BufferPin<CR>', { desc = 'Pin/unpin buffer' })
+vim.keymap.set('n', '<leader>bp', ':BufferPin<CR>', { desc = 'Pin/unpin buffer' })
 
 -- Close buffer
-vim.keymap.set('n', '<A-c>', ':BufferClose<CR>', { desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>c', ':BufferClose<CR>', { desc = 'Close current buffer' })
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands
@@ -33,13 +33,13 @@ vim.keymap.set('n', '<A-c>', ':BufferClose<CR>', { desc = 'Close current buffer'
 --                 :BufferCloseBuffersRight
 
 -- Magic buffer-picking mode
-vim.keymap.set('n', '<C-p>', ':BufferPick<CR>', { desc = 'Open buffer picker' })
+vim.keymap.set('n', '<C-p>', ':BufferPick<CR>', { desc = 'Open fuffer picker' })
 
 -- Sort automatically by...
-vim.keymap.set('n', '<Space>bb', ':BufferOrderByBufferNumber<CR>', { desc = 'Sort buffers by buffer number' })
-vim.keymap.set('n', '<Space>bd', ':BufferOrderByDirectory<CR>', { desc = 'Sort buffers by directory' })
-vim.keymap.set('n', '<Space>bl', ':BufferOrderByLanguage<CR>', { desc = 'Sort buffers by language' })
-vim.keymap.set('n', '<Space>bw', ':BufferOrderByWindowNumber<CR>', { desc = 'Sort buffers by window number' })
+vim.keymap.set('n', '<leader>bb', ':BufferOrderByBufferNumber<CR>', { desc = 'Sort buffers by buffer number' })
+vim.keymap.set('n', '<leader>bd', ':BufferOrderByDirectory<CR>', { desc = 'Sort buffers by directory' })
+vim.keymap.set('n', '<leader>bl', ':BufferOrderByLanguage<CR>', { desc = 'Sort buffers by language' })
+vim.keymap.set('n', '<leader>bw', ':BufferOrderByWindowNumber<CR>', { desc = 'Sort buffers by window number' })
 
 return {
   'romgrk/barbar.nvim',
