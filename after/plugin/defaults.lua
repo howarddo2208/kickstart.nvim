@@ -1,6 +1,7 @@
--- options
+-- DEFAULT OPTIONS
 vim.opt.relativenumber = true
 
+-- KEYMAPS
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
@@ -12,8 +13,6 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
-
--- KEYMAPS
 --  references: https://github.dev/LazyVim/LazyVim/blob/7ce1b1519a45f48aa4b5f35b7b7a886b42fe56d8/lua/lazyvim/config/keymaps.lua
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
@@ -28,4 +27,5 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- quit
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit current window" })
