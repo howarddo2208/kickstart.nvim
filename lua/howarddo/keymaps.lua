@@ -1,12 +1,29 @@
--- DEFAULT OPTIONS
-vim.opt.relativenumber = true
+-- [[ Basic Keymaps ]]
 
--- AUTOCOMMANDS
+-- Keymaps for better default experience
+-- See `:help vim.keymap.set()`
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
--- autosave on focus lost
-vim.api.nvim_create_autocmd({ 'FocusLost' }, {
-  command = 'silent! wa'
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
 })
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+vim.keymap.set('n', '<leader>lm', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- KEYMAPS
 local function map(mode, lhs, rhs, opts)
@@ -40,4 +57,3 @@ map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit current window" })
 -- saving with Ctrl+S
 vim.api.nvim_set_keymap("i", "<C-s>", "<ESC>:w<CR>a", {noremap = true, desc = 'save buffer'})
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {noremap = true, desc = 'save buffer'})
-
