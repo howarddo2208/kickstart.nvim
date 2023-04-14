@@ -20,8 +20,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set('n', '<leader>lm', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set('n', 'gL', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- KEYMAPS
 local function map(mode, lhs, rhs, opts)
@@ -72,6 +72,6 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window w
 map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit all" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit current window" })
 
--- -- saving with Ctrl+S
--- vim.api.nvim_set_keymap("i", "<C-s>", "<ESC>:w<CR>a", {noremap = true, desc = 'save buffer'})
--- vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {noremap = true, desc = 'save buffer'})
+-- saving with Ctrl+S
+map("i", "<C-s>", "<ESC>:w<CR>a", { desc = 'save buffer'})
+map("n", "<C-s>", ":w<CR>", { desc = 'save buffer'})

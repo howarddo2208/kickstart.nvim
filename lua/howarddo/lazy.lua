@@ -14,82 +14,99 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
-require('lazy').setup({                        -- NOTE: First, some plugins that don't require any configuration
+require('lazy').setup({ -- NOTE: First, some plugins that don't require any configuration
     -- Git related plugins
-    'tpope/vim-fugitive', 'tpope/vim-rhubarb', -- Detect tabstop and shiftwidth automatically
-    'tpope/vim-sleuth',                        -- Useful plugin to show you pending keybinds.
+    'tpope/vim-fugitive', 'tpope/vim-rhubarb',
+
+    -- Detect tabstop and shiftwidth automatically
+    'tpope/vim-sleuth',
+
+    -- NOTE: This is where your plugins related to LSP can be installed.
+    --  The configuration is done below. Search for lspconfig to find it below.
+    {
+        -- LSP Configuration & Plugins
+        'neovim/nvim-lspconfig',
+        dependencies = {
+            -- Automatically install LSPs to stdpath for neovim
+            { 'williamboman/mason.nvim', config = true },
+            'williamboman/mason-lspconfig.nvim',
+
+            -- Useful status updates for LSP
+            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+            { 'j-hui/fidget.nvim',       opts = {} },
+
+            -- Additional lua configuration, makes nvim stuff amazing!
+            'folke/neodev.nvim',
+        },
+    },
+
+    {
+        -- Autocompletion
+        'hrsh7th/nvim-cmp',
+        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    },
+
+    -- Useful plugin to show you pending keybinds.
     {
         'folke/which-key.nvim',
         opts = {}
-    }, {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
-    dependencies = {
-        -- LSP Support
-        { 'neovim/nvim-lspconfig' },             -- Required
-        {
-            'williamboman/mason.nvim',           --Optional
-        },
-        { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-        -- Autocompletion
-        { 'hrsh7th/nvim-cmp' },     -- Required
-        { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-        { 'L3MON4D3/LuaSnip' },     -- Required
-    }
-}, {
-    -- Adds git releated signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-        -- See `:help gitsigns.txt`
-        signs = {
-            add = {
-                text = '+'
-            },
-            change = {
-                text = '~'
-            },
-            delete = {
-                text = '_'
-            },
-            topdelete = {
-                text = '‾'
-            },
-            changedelete = {
-                text = '~'
+    },
+    {
+        -- Adds git releated signs to the gutter, as well as utilities for managing changes
+        'lewis6991/gitsigns.nvim',
+        opts = {
+            -- See `:help gitsigns.txt`
+            signs = {
+                add = {
+                    text = '+'
+                },
+                change = {
+                    text = '~'
+                },
+                delete = {
+                    text = '_'
+                },
+                topdelete = {
+                    text = '‾'
+                },
+                changedelete = {
+                    text = '~'
+                }
             }
         }
-    }
-}, {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    -- @error: if I config transparent like ThePrimeagen, lualine will fail
-    config = function()
-        vim.cmd.colorscheme 'onedark'
-    end,
-}, {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-        options = {
-            icons_enabled = false,
-            theme = 'onedark',
-            component_separators = '|',
-            section_separators = ''
+    },
+    {
+        -- Theme inspired by Atom
+        'navarasu/onedark.nvim',
+        priority = 1000,
+        -- @error: if I config transparent like ThePrimeagen, lualine will fail
+        config = function()
+            vim.cmd.colorscheme 'onedark'
+        end,
+    },
+    {
+        -- Set lualine as statusline
+        'nvim-lualine/lualine.nvim',
+        -- See `:help lualine.txt`
+        opts = {
+            options = {
+                icons_enabled = false,
+                theme = 'onedark',
+                component_separators = '|',
+                section_separators = ''
+            }
         }
-    }
-}, {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-        char = '┊',
-        show_trailing_blankline_indent = false
-    }
-},
+    },
+    {
+        -- Add indentation guides even on blank lines
+        'lukas-reineke/indent-blankline.nvim',
+        -- Enable `lukas-reineke/indent-blankline.nvim`
+        -- See `:help indent_blankline.txt`
+        opts = {
+            char = '┊',
+            show_trailing_blankline_indent = false
+        }
+    },
     -- "gc" to comment visual regions/lines
     {
         'numToStr/Comment.nvim',
@@ -113,61 +130,91 @@ require('lazy').setup({                        -- NOTE: First, some plugins that
         cond = function()
             return vim.fn.executable 'make' == 1
         end
-    }, {
-    -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
-    build = ":TSUpdate"
-}, { 'nvim-treesitter/playground' }, { 'ThePrimeagen/harpoon' }, { 'mbbill/undotree' }, {
-    "windwp/nvim-autopairs",
-    config = function()
-        require("nvim-autopairs").setup {}
-    end
-}, {
-    'windwp/nvim-ts-autotag',
-    config = function()
-        require 'nvim-treesitter.configs'.setup {
-            autotag = {
-                enable = true
+    },
+    {
+        -- Highlight, edit, and navigate code
+        'nvim-treesitter/nvim-treesitter',
+        dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+        build = ":TSUpdate"
+    },
+    -- display AST for treesitter
+    { 'nvim-treesitter/playground' },
+    -- add, quick navigate between frequent buffers
+    { 'ThePrimeagen/harpoon' },
+    -- undo with juice
+    { 'mbbill/undotree' },
+    -- autopair for tags, parentheses, quotes, etc
+    {
+        "windwp/nvim-autopairs",
+        config = function()
+            require("nvim-autopairs").setup {}
+        end
+    },
+    -- auto rename tag
+    {
+        'windwp/nvim-ts-autotag',
+        config = function()
+            require 'nvim-treesitter.configs'.setup {
+                autotag = {
+                    enable = true
+                }
             }
+        end
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+        end
+    },
+    {
+        'glepnir/dashboard-nvim',
+        event = 'VimEnter',
+        config = function()
+            require('dashboard').setup {
+                -- config
+            }
+        end,
+        dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+    },
+    -- file explorer
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        dependencies = { "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim" }
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({})
+        end
+    },
+    -- tab display and manage
+    {
+        'romgrk/barbar.nvim',
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        init = function()
+            vim.g.barbar_auto_setup = false
+        end,
+        opts = {}
+    },
+    -- toggle terminal
+    {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        opts = {}
+    },
+    -- refactoring plugin
+    {
+        "ThePrimeagen/refactoring.nvim",
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
         }
-    end
-}, {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-    end
-}, {
-    'glepnir/dashboard-nvim',
-    event = 'VimEnter',
-    config = function()
-        require('dashboard').setup {
-            -- config
-        }
-    end,
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-}, {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim" }
-}, {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    config = function()
-        require("nvim-surround").setup({})
-    end
-}, {
-    'romgrk/barbar.nvim',
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    init = function()
-        vim.g.barbar_auto_setup = false
-    end,
-    opts = {}
-}, {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    opts = {}
-} }, {})
+    }
+}, {})
