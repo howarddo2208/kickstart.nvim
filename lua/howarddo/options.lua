@@ -10,6 +10,8 @@ vim.g.maplocalleader = ' '
 
 -- Set highlight on search
 vim.o.hlsearch = false
+-- incremental search
+vim.o.incsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -47,3 +49,12 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 vim.o.relativenumber = true
+
+-- start/end of file always spaced out from cursor
+vim.o.scrolloff = 8
+
+-- store undo history for undotree plugin
+vim.o.swapfile = false
+vim.o.backup = false
+vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.o.undofile = true

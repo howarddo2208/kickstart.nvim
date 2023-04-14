@@ -26,17 +26,11 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, { desc = 'Search Files' })
+vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Search current Word' })
-vim.keymap.set('n', '<leader>st', require('telescope.builtin').live_grep, { desc = 'Search by Text' })
+vim.keymap.set('n', '<leader>st', require('telescope.builtin').live_grep, { desc = 'Search Text' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = 'Search Diagnostics' })
-
-
---search keymaps
-vim.keymap.set('n', '<leader>tk', require('telescope.builtin').keymaps, { desc = 'Keymaps search' })
-
---search help
-vim.keymap.set('n', '<leader>th', require('telescope.builtin').help_tags, { desc = 'Help search' })
-
---search builtin
-vim.keymap.set('n', '<leader>tb', require('telescope.builtin').builtin, { desc = 'Builtin search' })
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = 'Search Keymaps' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Hel docsp' })
+vim.keymap.set('n', '<leader>sb', require('telescope.builtin').builtin, { desc = 'Search builtin method' })

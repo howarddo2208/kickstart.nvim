@@ -3,25 +3,25 @@ local wk = require('which-key')
 -- Register prefix for <leader>g
 wk.register({
   g = {
-    name = 'Git+',
+    name = 'Git',
   },
   -- l = {
-  --   name = 'LSP+',
+  --   name = 'LSP',
   -- },
   b = {
-    name = 'Buffer Sort+',
+    name = 'Buffer Sort',
   },
   -- s = {
-  --   name = 'Search+',
+  --   name = 'Search',
   -- },
   -- w = {
-  --   name = 'Workplace+'
+  --   name = 'Workplace'
   -- },
   -- u = {
-  --   name = 'Toggle+'
+  --   name = 'Toggle'
   -- },
   -- t = {
-  --   name = 'Telescope+'
+  --   name = 'Telescope'
   -- }
 }, { prefix = '<leader>' })
 wk.setup()
