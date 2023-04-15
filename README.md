@@ -1,8 +1,8 @@
-# Howard Do - Neovim config
+# My Neovim config
 
 ### Introduction
 
-here is my neovim config, starting point was from kickstart.nvim. Later I decided to rebuilt its structure based on [ThePriemagen video](https://youtu.be/w7i4amO_zaE)
+Hi there, here is my neovim config, starting point was from kickstart.nvim. Later I decided to rebuilt its structure based on [ThePriemagen video](https://youtu.be/w7i4amO_zaE) and [TJ's config](https://github.dev/tjdevries/config_manager)
 
 ### Installation
 
@@ -20,10 +20,10 @@ Additional system requirements:
 
 #### Example: Adding neo-tree plugin to display file tree
 
-In the file: `lua/howarddo/lazy.lua`, add:
+add a new file into `lua/plugins`:
 
 ```lua
--- File: lua/howarddo/lazy.lua
+-- new file: lua/plugins/neotree.lua
 
 {
     "nvim-neo-tree/neo-tree.nvim",
@@ -36,17 +36,20 @@ In the file: `lua/howarddo/lazy.lua`, add:
 },
 ```
 
-Then create file `neotree.lua` inside `after/plugin` folder
+If you want to further config the plugin, create a new fileinside `after/plugin` folder
 
 ```lua
--- File: after/plugin/neotree.lua
+-- new file: after/plugin/neotree.lua
+
+-- ensure not throw error and config in case we can't load the plugin
+if not pcall(require, "neo-tree") then
+  return
+end
 
 require("neo-tree").setup({
   -- your options, setup here
 })
 ```
-
-This will automatically install `neo-tree.nvim` and enable it on startup. For more information, see documentation for [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 ### Windows Installation
 

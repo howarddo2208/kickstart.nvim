@@ -1,3 +1,7 @@
+if not pcall(require, "barbar") then
+  return
+end
+
 local map = require('howarddo.utils').map
 -- Move to previous/next
 map('n', '<A-h>', ':BufferPrevious<CR>', { desc = 'Move to previous buffer' })

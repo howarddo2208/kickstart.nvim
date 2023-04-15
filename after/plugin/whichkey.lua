@@ -1,3 +1,7 @@
+if not pcall(require, "which-key") then
+  return
+end
+
 local wk = require('which-key')
 
 -- Register prefixes info

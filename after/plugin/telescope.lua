@@ -1,3 +1,7 @@
+if not pcall(require, "telescope") then
+  return
+end
+
 -- [[ Configure Telescope ]]
 local telescope = require("telescope")
 local telescopeConfig = require("telescope.config")

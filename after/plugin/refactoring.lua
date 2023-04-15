@@ -1,3 +1,7 @@
+if not pcall(require, "refactoring") then
+  return
+end
+
 require('refactoring').setup({
   prompt_func_return_type = {
     go = false,

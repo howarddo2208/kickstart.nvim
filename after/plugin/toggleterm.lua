@@ -1,3 +1,7 @@
+if not pcall(require, "toggleterm") then
+  return
+end
+
 local map      = require('howarddo.utils').map
 local Terminal = require('toggleterm.terminal').Terminal
 

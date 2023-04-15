@@ -1,3 +1,7 @@
+if not pcall(require, "copilot") then
+  return
+end
+
 require('copilot').setup({
   panel = {
     enabled = true,
