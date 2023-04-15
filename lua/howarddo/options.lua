@@ -1,5 +1,3 @@
-
-
 -- Set highlight on search
 vim.o.hlsearch = false
 -- incremental search
