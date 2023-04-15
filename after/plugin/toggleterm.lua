@@ -1,3 +1,4 @@
+local map      = require('howarddo.utils').map
 local Terminal = require('toggleterm.terminal').Terminal
 
 -- LAZYGIT TOGGLE TERM
@@ -24,7 +25,7 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>",
+map("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>",
   { noremap = true, silent = true, desc = "Lazygit" })
 
 -- FLOAT TOGGLE TERM
@@ -40,5 +41,5 @@ function _floatterm_toggle()
 end
 
 -- Keymap for floatterm
-vim.keymap.set({ 'n', 't' }, "<C-\\>", "<cmd>lua _floatterm_toggle()<CR>",
+map({ 'n', 't' }, "<C-\\>", "<cmd>lua _floatterm_toggle()<CR>",
   { noremap = true, silent = true, desc = "Floating Terminal" })

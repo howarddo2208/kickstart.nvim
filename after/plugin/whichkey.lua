@@ -1,6 +1,6 @@
 local wk = require('which-key')
 
--- Register prefix for <leader>g
+-- Register prefixes info
 wk.register({
   g = {
     name = 'Git',
