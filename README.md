@@ -6,6 +6,7 @@ Hi there, here is my neovim config, my starting point was from [kickstart.nvim](
 - [ThePriemagen video](https://youtu.be/w7i4amO_zaE)
 - [TJ's config](https://github.dev/tjdevries/config_manager)
 - [ziontee113 Luasnip tutorial](https://youtu.be/ub0REXjhpmk)
+- [Takuya's dotfiles](https://github.com/craftzdog/dotfiles-public)
 
 ### Installation
 
