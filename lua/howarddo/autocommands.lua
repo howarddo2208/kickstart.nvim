@@ -1,6 +1,6 @@
 -- autosave on focus lost
 vim.api.nvim_create_autocmd({ 'FocusLost' }, {
-  command = 'silent! wa'
+  command = 'silent! wa',
 })
 
 -- [[ Highlight on yank ]]
@@ -13,4 +13,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-

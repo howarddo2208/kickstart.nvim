@@ -1,8 +1,8 @@
-if not pcall(require, "which-key") then
+if not pcall(require, 'which-key') then
   return
 end
 
-local wk = require('which-key')
+local wk = require 'which-key'
 
 -- Register prefixes info
 wk.register({

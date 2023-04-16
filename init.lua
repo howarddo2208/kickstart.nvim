@@ -12,9 +12,14 @@ vim.g.maplocalleader = ' '
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn
-	    .system { 'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', -- latest stable release
-		    lazypath }
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -23,29 +28,29 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 --  if you want to further config them, create a file in `after/plugin`
-require('lazy').setup("plugins", {
-	dev = {
-		-- directory where you store your local plugin projects
-		path = "~/plugins",
-		fallback = false,
-	},
-	ui = {
-		icons = {
-			cmd = "⌘",
-			config = "🛠",
-			event = "📅",
-			ft = "📂",
-			init = "⚙",
-			keys = "🗝",
-			plugin = "🔌",
-			runtime = "💻",
-			source = "📄",
-			start = "🚀",
-			task = "📌",
-		},
-	},
+require('lazy').setup('plugins', {
+  dev = {
+    -- directory where you store your local plugin projects
+    path = '~/plugins',
+    fallback = false,
+  },
+  ui = {
+    icons = {
+      cmd = '⌘',
+      config = '🛠',
+      event = '📅',
+      ft = '📂',
+      init = '⚙',
+      keys = '🗝',
+      plugin = '🔌',
+      runtime = '💻',
+      source = '📄',
+      start = '🚀',
+      task = '📌',
+    },
+  },
 })
 
-require("howarddo.options")
-require("howarddo.keymaps")
-require("howarddo.autocommands")
+require 'howarddo.options'
+require 'howarddo.keymaps'
+require 'howarddo.autocommands'

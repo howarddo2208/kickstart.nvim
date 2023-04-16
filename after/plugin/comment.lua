@@ -1,4 +1,4 @@
-if not pcall(require, "Comment") then
+if not pcall(require, 'Comment') then
   return
 end
 

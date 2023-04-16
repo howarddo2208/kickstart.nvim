@@ -95,4 +95,4 @@ map('n', '<leader>fb', function()
   require('telescope').extensions.file_browser.file_browser()
 end, { desc = 'browse current workspace' })
 
-map('n', '<space>fB', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { noremap = true, desc="browse current folder" })
+map('n', '<space>fB', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { noremap = true, desc = 'browse current folder' })

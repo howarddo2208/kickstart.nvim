@@ -46,5 +46,5 @@ vim.o.scrolloff = 8
 -- store undo history for undotree plugin
 vim.o.swapfile = false
 vim.o.backup = false
-vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.o.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 vim.o.undofile = true

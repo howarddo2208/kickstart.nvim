@@ -1,49 +1,45 @@
-if not pcall(require, "toggleterm") then
+if not pcall(require, 'toggleterm') then
   return
 end
 
-local map      = require('howarddo.utils').map
+local map = require('howarddo.utils').map
 local Terminal = require('toggleterm.terminal').Terminal
 
 -- LAZYGIT TOGGLE TERM
-local lazygit  = Terminal:new({
-  cmd = "lazygit",
-  dir = "git_dir",
-  direction = "float",
+local lazygit = Terminal:new {
+  cmd = 'lazygit',
+  dir = 'git_dir',
+  direction = 'float',
   float_opts = {
-    border = "double",
+    border = 'double',
   },
   -- function to run on opening the terminal
   on_open = function(term)
-    vim.cmd("startinsert!")
-    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>",
-      { noremap = true, silent = true })
+    vim.cmd 'startinsert!'
+    vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
   end,
   -- function to run on closing the terminal
   on_close = function(term)
-    vim.cmd("startinsert!")
+    vim.cmd 'startinsert!'
   end,
-})
+}
 
 function _lazygit_toggle()
   lazygit:toggle()
 end
 
-map("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>",
-  { noremap = true, silent = true, desc = "Lazygit" })
+map('n', '<leader>gg', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silent = true, desc = 'Lazygit' })
 
 -- FLOAT TOGGLE TERM
-local floatterm = Terminal:new({
+local floatterm = Terminal:new {
   cmd = vim.o.shell,
-  direction = "float",
-  float_opts = {
-  },
-})
+  direction = 'float',
+  float_opts = {},
+}
 
 function _floatterm_toggle()
   floatterm:toggle()
 end
 
 -- Keymap for floatterm
-map({ 'n', 't' }, "<C-\\>", "<cmd>lua _floatterm_toggle()<CR>",
-  { noremap = true, silent = true, desc = "Floating Terminal" })
+map({ 'n', 't' }, '<C-\\>', '<cmd>lua _floatterm_toggle()<CR>', { noremap = true, silent = true, desc = 'Floating Terminal' })

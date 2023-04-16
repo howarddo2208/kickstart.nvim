@@ -1,6 +1,5 @@
 local M = {}
 
-
 M.map = function(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
   -- NOTE: if you want to lazyload the keymap, use this instead:
@@ -14,7 +13,7 @@ M.map = function(mode, lhs, rhs, opts)
 end
 
 -- SNIPPET CREATOR FUNCTION BUILDER
-local ls = require("luasnip")
+local ls = require 'luasnip'
 M.snippetCreateFnBuilder = function(snippets, autosnippets, file_pattern, group)
   -- whenever using this to create snippet, must switch buffer in order to BufEnter event to trigger -> hot reload sniippet
   local function createSnippet(trigger, nodes, opts)
@@ -31,19 +30,19 @@ M.snippetCreateFnBuilder = function(snippets, autosnippets, file_pattern, group)
       end
 
       -- if opts is a string
-      if type(opts) == "string" then
-        if opts == "auto" then
+      if type(opts) == 'string' then
+        if opts == 'auto' then
           target_table = autosnippets
         else
-          table.insert(keymaps, { "i", opts })
+          table.insert(keymaps, { 'i', opts })
         end
       end
 
       -- if opts is a table
-      if opts ~= nil and type(opts) == "table" then
+      if opts ~= nil and type(opts) == 'table' then
         for _, keymap in ipairs(opts) do
-          if type(keymap) == "string" then
-            table.insert(keymaps, { "i", keymap })
+          if type(keymap) == 'string' then
+            table.insert(keymaps, { 'i', keymap })
           else
             table.insert(keymaps, keymap)
           end
@@ -51,9 +50,9 @@ M.snippetCreateFnBuilder = function(snippets, autosnippets, file_pattern, group)
       end
 
       -- set autocmd for each keymap
-      if opts ~= "auto" then
+      if opts ~= 'auto' then
         for _, keymap in ipairs(keymaps) do
-          vim.api.nvim_create_autocmd("BufEnter", {
+          vim.api.nvim_create_autocmd('BufEnter', {
             pattern = pattern,
             group = group,
             callback = function()
