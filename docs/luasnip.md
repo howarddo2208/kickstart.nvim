@@ -1,4 +1,4 @@
-TODO: step by step guide to implement luasnip
+WIP
 ```lua
 -- EXAMPLE SNIPPETS: based on tutorial
 --@todo: write docs about this and clean up the examples

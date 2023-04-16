@@ -2,7 +2,10 @@
 
 ### Introduction
 
-Hi there, here is my neovim config, starting point was from kickstart.nvim. Later I decided to rebuilt its structure based on [ThePriemagen video](https://youtu.be/w7i4amO_zaE) and [TJ's config](https://github.dev/tjdevries/config_manager)
+Hi there, here is my neovim config, my starting point was from [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Later I decided to rebuilt its structure based on:
+- [ThePriemagen video](https://youtu.be/w7i4amO_zaE)
+- [TJ's config](https://github.dev/tjdevries/config_manager)
+- [ziontee113 Luasnip tutorial](https://youtu.be/ub0REXjhpmk)
 
 ### Installation
 
@@ -64,3 +67,5 @@ This requires:
 ```lua
 {'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 ```
+### TODOS
+- [ ] Write step by step configuration guide for luasnip
