@@ -54,5 +54,4 @@ map("n", "<leader>Q", "<cmd>xa<cr>", { desc = "save and quit all windows" })
 map("n", "<leader>q", "<cmd>wq<cr>", { desc = "save and quit current window" })
 
 -- saving with Ctrl+S
-map("i", "<C-s>", "<ESC>:w<CR>a", { desc = 'save buffer' })
-map("n", "<C-s>", ":w<CR>", { desc = 'save buffer' })
+map({"i", "n", "s"}, "<C-s>", "<ESC>:w<CR>", { desc = 'save buffer' })
