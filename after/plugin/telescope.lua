@@ -5,7 +5,10 @@ end
 -- [[ Configure Telescope ]]
 local telescope = require("telescope")
 local telescopeConfig = require("telescope.config")
+local actions = require("telescope.actions")
 local map = require("howarddo.utils").map
+
+local fb_actions = require "telescope".extensions.file_browser.actions
 
 -- Clone the default Telescope configuration
 local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
@@ -22,6 +25,9 @@ telescope.setup({
     -- `hidden = true` is not supported in text grep commands.
     vimgrep_arguments = vimgrep_arguments,
     mappings = {
+      n = {
+        ['q'] = actions.close
+      },
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
@@ -34,11 +40,33 @@ telescope.setup({
       find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
     },
   },
+  extensions = {
+    file_browser = {
+      theme = "dropdown",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+        -- your custom insert mode mappings
+        ["i"] = {
+          ["<C-w>"] = function() vim.cmd('normal vbd') end,
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+          ["N"] = fb_actions.create,
+          ["h"] = fb_actions.goto_parent_dir,
+          ["/"] = function()
+            vim.cmd('startinsert')
+          end
+        },
+      },
+    },
+  },
 })
 
 
--- Enable telescope fzf native, if installed
+-- load extensions
 pcall(telescope.load_extension, 'fzf')
+pcall(telescope.load_extension, "file_browser")
 
 -- See `:help telescope.builtin`
 map('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -51,8 +79,8 @@ map('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-map('n', '<leader>f', require('telescope.builtin').find_files, { desc = 'Search Files' })
-map('n', '<leader>sg', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
+map('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Search Files' })
+map('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
 map('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
 map('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Search current Word' })
 map('n', '<leader>st', require('telescope.builtin').live_grep, { desc = 'Search Text' })
@@ -60,3 +88,8 @@ map('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = 'Searc
 map('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = 'Search Keymaps' })
 map('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Hel docsp' })
 map('n', '<leader>sb', require('telescope.builtin').builtin, { desc = 'Search builtin method' })
+
+-- keymap for file browser
+map('n', '<leader>fb', function()
+  require('telescope').extensions.file_browser.file_browser()
+end, { desc = 'File Browser' })
