@@ -1,32 +1,32 @@
-if not pcall(require, "telescope") then
+if not pcall(require, 'telescope') then
   return
 end
 
 -- [[ Configure Telescope ]]
-local telescope = require("telescope")
-local telescopeConfig = require("telescope.config")
-local actions = require("telescope.actions")
-local map = require("howarddo.utils").map
+local telescope = require 'telescope'
+local telescopeConfig = require 'telescope.config'
+local actions = require 'telescope.actions'
+local map = require('howarddo.utils').map
 
-local fb_actions = require "telescope".extensions.file_browser.actions
+local fb_actions = require('telescope').extensions.file_browser.actions
 
 -- Clone the default Telescope configuration
 local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
 
 -- I want to search in hidden/dot files.
-table.insert(vimgrep_arguments, "--hidden")
+table.insert(vimgrep_arguments, '--hidden')
 -- I don't want to search in the `.git` directory.
-table.insert(vimgrep_arguments, "--glob")
-table.insert(vimgrep_arguments, "!**/.git/*")
+table.insert(vimgrep_arguments, '--glob')
+table.insert(vimgrep_arguments, '!**/.git/*')
 
 -- See `:help telescope` and `:help telescope.setup()`
-telescope.setup({
+telescope.setup {
   defaults = {
     -- `hidden = true` is not supported in text grep commands.
     vimgrep_arguments = vimgrep_arguments,
     mappings = {
       n = {
-        ['q'] = actions.close
+        ['q'] = actions.close,
       },
       i = {
         ['<C-u>'] = false,
@@ -37,36 +37,37 @@ telescope.setup({
   pickers = {
     find_files = {
       -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+      find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
     },
   },
   extensions = {
     file_browser = {
-      theme = "dropdown",
+      theme = 'dropdown',
       -- disables netrw and use telescope-file-browser in its place
       hijack_netrw = true,
       mappings = {
         -- your custom insert mode mappings
-        ["i"] = {
-          ["<C-w>"] = function() vim.cmd('normal vbd') end,
+        ['i'] = {
+          ['<C-w>'] = function()
+            vim.cmd 'normal vbd'
+          end,
         },
-        ["n"] = {
+        ['n'] = {
           -- your custom normal mode mappings
-          ["N"] = fb_actions.create,
-          ["h"] = fb_actions.goto_parent_dir,
-          ["/"] = function()
-            vim.cmd('startinsert')
-          end
+          ['N'] = fb_actions.create,
+          ['h'] = fb_actions.goto_parent_dir,
+          ['/'] = function()
+            vim.cmd 'startinsert'
+          end,
         },
       },
     },
   },
-})
-
+}
 
 -- load extensions
 pcall(telescope.load_extension, 'fzf')
-pcall(telescope.load_extension, "file_browser")
+pcall(telescope.load_extension, 'file_browser')
 
 -- See `:help telescope.builtin`
 map('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -92,4 +93,6 @@ map('n', '<leader>sb', require('telescope.builtin').builtin, { desc = 'Search bu
 -- keymap for file browser
 map('n', '<leader>fb', function()
   require('telescope').extensions.file_browser.file_browser()
-end, { desc = 'File Browser' })
+end, { desc = 'browse current workspace' })
+
+map('n', '<space>fB', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { noremap = true, desc="browse current folder" })
