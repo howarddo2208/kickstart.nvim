@@ -20,14 +20,14 @@ Additional system requirements:
 
 ### Configuration And Extension
 
-* Adding plugin by first adding into `lua/howarddo/lazy.lua` then add the configuration file into `after/plugin` folder 
+* Adding plugin by first adding into `lua/howarddo/plugins.lua` then add the configuration file into `after/plugin` folder 
 
 #### Example: Adding neo-tree plugin to display file tree
 
-add a new file into `lua/plugins`:
+add a new plugin into `lua/howarddo/plugins`:
 
 ```lua
--- new file: lua/plugins/neotree.lua
+-- new file: lua/howarddo/plugins.lua
 
 {
     "nvim-neo-tree/neo-tree.nvim",

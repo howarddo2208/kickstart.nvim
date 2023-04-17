@@ -23,12 +23,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: load all plugins from 'lua/plugins folder'
+-- NOTE: load all plugins from 'lua/howarddo/plugins.lua'
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 --  if you want to further config them, create a file in `after/plugin`
-require('lazy').setup('plugins', {
+require('lazy').setup('howarddo.plugins', {
   dev = {
     -- directory where you store your local plugin projects
     path = '~/plugins',
