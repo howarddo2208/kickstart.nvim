@@ -28,8 +28,14 @@ map('n', '<C-u>', '<C-u>zz', { desc = 'scroll up half page' })
 map('n', 'n', 'nzzzv', { desc = 'next match' })
 map('n', 'N', 'Nzzzv', { desc = 'previous match' })
 
+-- yank/delete without copy to clipboard
 map('x', '<leader>p', [["_dP]], { desc = 'paste without copying deleted text' })
 map({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'delete without copying text' })
+
+-- yank to system clipboard
+map({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'yank to system clipboard' })
+map('n', '<leader>Y', [["+Y]], { desc = 'yank til end of line to system clipboard' })
+map({ 'n', 'v' }, '<leader>P', [["+gP]], { desc = 'paste from system clipboard' })
 
 -- quit
 map('n', '<leader>Q', '<cmd>qa<cr>', { desc = 'quit all windows' })
@@ -37,3 +43,11 @@ map('n', '<leader>q', '<cmd>q<cr>', { desc = 'quit current window' })
 
 -- saving with Ctrl+S
 map({ 'i', 'n', 's' }, '<C-s>', '<ESC>:w<CR>', { desc = 'save buffer' })
+
+-- delete current file, follow up with :bd or as I set <leader>c to unload buffer
+map('n', '<leader>fd', '<cmd>!rm %<cr>', { desc = 'delete current file' })
+map('n', '<leader>c', '<cmd>bd<cr>', { desc = 'Unload buffer' })
+
+-- language server info
+map('n', '<leader>li', '<cmd>LspInfo<CR>', { desc = 'LSP Info' })
+map('n', '<leader>lI', '<cmd>Mason<CR>', { desc = 'Manage LSP servers' })
