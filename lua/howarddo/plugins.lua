@@ -256,6 +256,9 @@ return {
     'aserowy/tmux.nvim',
     config = function()
       return require('tmux').setup {
+        copy_sync = {
+          enable = false,
+        },
         resize = {
           -- enables default keybindings (A-hjkl) for normal mode
           enable_default_keybindings = false,
