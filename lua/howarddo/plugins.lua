@@ -98,7 +98,13 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
+      {
+        'williamboman/mason.nvim',
+        config = function()
+          require('mason').setup()
+        end,
+        build = ':MasonUpdate', -- :MasonUpdate updates registry contents
+      },
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
@@ -137,7 +143,21 @@ return {
       vim.fn['mkdp#util#install']()
     end,
   },
-  { 'jose-elias-alvarez/null-ls.nvim' },
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require('null-ls').setup()
+    end,
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
+  {
+    'jay-babu/mason-null-ls.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      'williamboman/mason.nvim',
+      'jose-elias-alvarez/null-ls.nvim',
+    },
+  },
   {
     'nvim-tree/nvim-tree.lua',
     version = '*',
