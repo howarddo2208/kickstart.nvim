@@ -277,7 +277,7 @@ return {
     config = function()
       return require('tmux').setup {
         copy_sync = {
-          enable = false,
+          enable = true,
         },
         resize = {
           -- enables default keybindings (A-hjkl) for normal mode
