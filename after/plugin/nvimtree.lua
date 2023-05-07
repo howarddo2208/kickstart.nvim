@@ -13,6 +13,10 @@ require('nvim-tree').setup { -- BEGIN_DEFAULT_OPTS
     update_root = false,
     ignore_list = {},
   },
+  git = {
+    -- show ignored files
+    ignore = false
+  }
 } -- END_DEFAULT_OPTS
 
 vim.keymap.set('n', '\\', ':NvimTreeToggle<CR>', { desc = 'Toggle Explorer' })

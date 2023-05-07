@@ -22,7 +22,8 @@ local on_attach = function(client, bufnr)
       group = augroup,
       buffer = bufnr,
       callback = function()
-        lsp_formatting(bufnr)
+        -- want to autoformat? uncomment below
+        -- lsp_formatting(bufnr)
       end,
     })
   end

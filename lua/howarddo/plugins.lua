@@ -219,7 +219,6 @@ return {
     version = '*',
     opts = {},
   },
-  { 'nvim-treesitter/playground', event = 'VeryLazy' },
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -289,5 +288,9 @@ return {
         },
       }
     end,
+  },
+  {
+    -- illuminate all the occurences of the word under the cursor
+    'RRethy/vim-illuminate'
   },
 }

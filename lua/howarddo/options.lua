@@ -1,3 +1,9 @@
+-- tab space
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+
 -- Set highlight on search
 vim.o.hlsearch = false
 -- incremental search

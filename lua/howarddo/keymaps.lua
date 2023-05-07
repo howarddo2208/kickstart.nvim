@@ -9,8 +9,8 @@ map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+map('n', '<leader>lk', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+map('n', '<leader>lj', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 map('n', 'gl', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 map('n', 'gL', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
@@ -51,3 +51,8 @@ map('n', '<leader>c', '<cmd>bd<cr>', { desc = 'Unload buffer' })
 -- language server info
 map('n', '<leader>li', '<cmd>LspInfo<CR>', { desc = 'LSP Info' })
 map('n', '<leader>lI', '<cmd>Mason<CR>', { desc = 'Manage LSP servers' })
+
+-- tab switching
+map('n', '<M-t>', '<cmd>tabnew<CR>', { desc = 'new tab' })
+map('n', '<M-Tab>', '<cmd>tabnext<CR>', { desc = 'next tab' })
+map('n', '<M-S-Tab>', '<cmd>tabprevious<CR>', { desc = 'previous tab' })

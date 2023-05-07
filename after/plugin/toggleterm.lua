@@ -33,7 +33,7 @@ map('n', '<leader>gg', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silen
 
 -- MIDNIGHT COMMANDER TERMINAL
 local mc = Terminal:new {
-  cmd = 'mc --nosubshell',
+  cmd = 'mc',
   dir = 'git_dir',
   direction = 'float',
   float_opts = {

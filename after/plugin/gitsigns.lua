@@ -11,7 +11,7 @@ require('gitsigns').setup {
     end
 
     -- Navigation
-    map('n', ']g', function()
+    map('n', '<leader>gj', function()
       if vim.wo.diff then
         return ']g'
       end
@@ -21,7 +21,7 @@ require('gitsigns').setup {
       return '<Ignore>'
     end, 'Jump to next hunk')
 
-    map('n', '[g', function()
+    map('n', '<leader>gk', function()
       if vim.wo.diff then
         return '[g'
       end
