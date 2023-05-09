@@ -1,8 +1,3 @@
--- autosave on focus lost
-vim.api.nvim_create_autocmd({ 'FocusLost' }, {
-  command = 'silent! wa',
-})
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -24,3 +19,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(dir, "p")
   end
 })
+
+-- remove auto insert comment leader on new line defaulted by neovim filetype plugin
+vim.cmd([[
+  augroup DisableAutoComment
+    autocmd!
+    autocmd FileType * setlocal formatoptions-=cro
+  augroup END
+]])

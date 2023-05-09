@@ -51,7 +51,8 @@ return {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
     event = 'InsertEnter',
-    config = function() end,
+    config = function()
+    end,
   },
   {
     'glepnir/dashboard-nvim',
@@ -293,4 +294,8 @@ return {
     -- illuminate all the occurences of the word under the cursor
     'RRethy/vim-illuminate'
   },
+  {
+    'postfen/clipboard-image.nvim',
+    commit = '9c45980'
+  }
 }
