@@ -49,6 +49,9 @@ require('lazy').setup('howarddo.plugins', {
       task = '📌',
     },
   },
+  git = {
+    timeout = 300
+  }
 })
 
 require 'howarddo.options'
