@@ -298,5 +298,16 @@ return {
     'postfen/clipboard-image.nvim',
     commit = '9c45980'
   },
-  {'napisani/nvim-github-codesearch', build = 'make'}
+  { 'napisani/nvim-github-codesearch', build = 'make' },
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require "octo".setup()
+    end
+  }
 }
