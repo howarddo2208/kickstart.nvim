@@ -298,7 +298,6 @@ return {
     'postfen/clipboard-image.nvim',
     commit = '9c45980'
   },
-  { 'napisani/nvim-github-codesearch', build = 'make' },
   {
     'pwntester/octo.nvim',
     dependencies = {
