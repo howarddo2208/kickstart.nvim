@@ -2,64 +2,105 @@ if not pcall(require, 'toggleterm') then
   return
 end
 
-local map = require('howarddo.utils').map
-local Terminal = require('toggleterm.terminal').Terminal
+-- below I steal from https://github.com/liaohui5/dotfiles/blob/d935bdcfd8a04d6112b380d071df06442b2b48b3/nvim/lua/plugins/toggleterm.lua
 
-local on_open = function(term)
-  vim.cmd 'startinsert!'
-  vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
-end
-local on_close = function(term)
-  vim.cmd 'startinsert!'
-end
-
--- LAZYGIT TOGGLE TERM
-local lazygit = Terminal:new {
-  cmd = 'lazygit',
-  dir = 'git_dir',
-  direction = 'float',
-  float_opts = {
-    border = 'double',
-  },
-  on_open = on_open,
-  on_close = on_close,
+-- ╭───────────────────────────────────────────────────────────────────────────────────╮
+-- │  Toggleterm                                                                       │
+-- │  docs: https://github.com/akinsho/toggleterm.nvim                                 │
+-- ╰───────────────────────────────────────────────────────────────────────────────────╯
+-- ╭──────────────────────────────────────────────────────────────────────────────────╮
+-- │ Terminal API                                                                     │
+-- │ https://github.com/akinsho/toggleterm.nvim/blob/main/lua/toggleterm/terminal.lua │
+-- ╰──────────────────────────────────────────────────────────────────────────────────╯
+-- new
+-- toggle
+-- is_open
+-- open
+-- close
+-- shutdown
+local toggleterm = require("toggleterm")
+local Terminal = require("toggleterm.terminal").Terminal
+local plugins = {}
+local float_opts = {
+  border = "single", -- single | double | shadow | curved
+  width = 160,
+  height = 40,
+  winblend = 1,
 }
 
-function _lazygit_toggle()
-  lazygit:toggle()
+local function createTerminal(cmd)
+  return Terminal:new({
+    cmd = cmd,
+    hidden = true,
+    direction = "float",
+    float_opts = float_opts,
+  })
 end
 
-map('n', '<leader>gg', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silent = true, desc = 'Lazygit' })
-
--- MIDNIGHT COMMANDER TERMINAL
-local mc = Terminal:new {
-  cmd = 'mc',
-  dir = 'git_dir',
-  direction = 'float',
-  float_opts = {
-    border = 'double',
-  },
-  on_open = on_open,
-  on_close = on_close,
-}
-
-function _mc_toggle()
-  mc:toggle()
+-- ╭──────────────────────────────────────────────────────────────────────────────╮
+-- │  lazygit                                                                     │
+-- │  https://github.com/jesseduffield/lazygit                                    │
+-- ╰──────────────────────────────────────────────────────────────────────────────╯
+plugins.lazygit = function()
+  return createTerminal("lazygit")
 end
 
-map('n', '<leader>mc', '<cmd>lua _mc_toggle()<CR>', { noremap = true, silent = true, desc = 'Midnight Commander' })
+-- ╭──────────────────────────────────────────────────────────────────────────────╮
+-- │ 集成 tig                                                                     │
+-- │ https://github.com/jonas/tig                                                 │
+-- ╰──────────────────────────────────────────────────────────────────────────────╯
+-- plugins.tig = function()
+--   return createTerminal("tig")
+-- end
 
--- FLOAT TOGGLE TERM
-local floatterm = Terminal:new {
-  cmd = vim.o.shell,
-  direction = 'float',
-  float_opts = {},
-}
-
-function _floatterm_toggle()
-  floatterm:toggle()
+-- ╭──────────────────────────────────────────────────────────────────────────────╮
+-- │  集成 vifm                                                                   │
+-- │  https://github.com/vifm/vifm                                                │
+-- ╰──────────────────────────────────────────────────────────────────────────────╯
+plugins.vifm = function()
+  local buffPath = vim.fn.expand("%:p:h")
+  local rootPath = vim.fn.getcwd()
+  local commands = string.format("vifm %s %s", buffPath, rootPath)
+  return createTerminal(commands)
 end
 
--- Keymap for floatterm
-map({ 'n', 't' }, '<C-\\>', '<cmd>lua _floatterm_toggle()<CR>',
-{ noremap = true, silent = true, desc = 'Floating Terminal' })
+local keys = require("howarddo.keybindings").toggletermKeys(plugins)
+toggleterm.setup({
+  -- on_close          = function() end
+  -- on_stdout         = function() end
+  -- on_stderr         = function() end
+  -- on_exit           = function() end
+  -- shell             = vim.o.shell, -- 打开终端使用的shell: 不建议修改, 默认使用系统默认的 shell
+  on_open = function(term)
+    if _G.buffPath then
+      term:change_dir(_G.buffPath)
+    end
+  end,
+  open_mapping = keys,
+  hide_numbers = true,
+  shade_terminals = false,
+  persist_size = true,
+  start_in_insert = true,
+  shading_factor = 1,
+  insert_mappings = true,
+  terminal_mappings = true,
+  persist_mode = false,
+  direction = "float",  -- vertical | horizontal | tab | float
+  float_opts = float_opts,
+  close_on_exit = true, -- close the terminal window when the process exits
+  auto_scroll = true,   -- automatically scroll to the bottom on terminal output
+  shade_filetypes = {},
+  size = function(term)
+    if term.direction == "horizontal" then
+      return 15
+    elseif term.direction == "vertical" then
+      return vim.o.columns * 0.4
+    end
+  end,
+})
+
+local wk = require "which-key"
+
+local toggle_lazygit = function()
+  plugins.lazygit():toggle()
+end

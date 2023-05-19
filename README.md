@@ -2,11 +2,12 @@
 
 ### Introduction
 
-Hi there, here is my neovim config, my starting point was from [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Later I decided to rebuilt its structure based on:
+Hi there, here is my neovim config, my starting point was from [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Later I decided to rebuilt its structure based on some other dotfiles I read:
 - [ThePriemagen video](https://youtu.be/w7i4amO_zaE)
 - [TJ's config](https://github.dev/tjdevries/config_manager)
 - [ziontee113 Luasnip tutorial](https://youtu.be/ub0REXjhpmk)
 - [Takuya's dotfiles](https://github.com/craftzdog/dotfiles-public)
+- [liaohui5/dotfiles](https://github.com/liaohui5/dotfiles): steal keybindings and toggleterm config
 
 ### Installation
 
@@ -70,3 +71,4 @@ This requires:
 ```
 ### TODOS
 - [ ] Write step by step configuration guide for luasnip
+- [] restructure keybindings
