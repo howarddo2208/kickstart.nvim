@@ -68,6 +68,9 @@ vim.o.undofile = true
 --                    + 'j'    -- Join comments smartly
 -- vim.o.formatoptions = vim.o.formatoptions .. 'tcrqnj'
 
+-- stop wrapping lines in a middle of the word, reference: https://stackoverflow.com/questions/9692525/stop-vim-wrapping-lines-in-the-middle-of-a-word
+vim.o.linebreak = true
+
 -- autosave on events
 vim.o.autowriteall = true
 
