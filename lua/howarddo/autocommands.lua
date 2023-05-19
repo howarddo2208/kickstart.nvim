@@ -27,3 +27,14 @@ vim.cmd([[
     autocmd FileType * setlocal formatoptions-=cro
   augroup END
 ]])
+
+-- open telescope on startup
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+    if #vim.fn.argv() == 0 then
+      vim.defer_fn(function()
+        require('telescope.builtin').find_files()
+      end, 500)
+    end
+  end
+})
