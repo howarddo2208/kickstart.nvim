@@ -92,6 +92,7 @@ telescope.setup {
 -- load extensions
 pcall(telescope.load_extension, 'fzf')
 pcall(telescope.load_extension, 'file_browser')
+pcall(telescope.load_extension, 'ui-select')
 
 -- See `:help telescope.builtin`
 map('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -111,7 +112,7 @@ map('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Searc
 map('n', '<leader>st', require('telescope.builtin').live_grep, { desc = 'Search Text' })
 map('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = 'Search Diagnostics' })
 map('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = 'Search Keymaps' })
-map('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Hel docsp' })
+map('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Help docs' })
 map('n', '<leader>sb', require('telescope.builtin').builtin, { desc = 'Search builtin method' })
 
 -- keymap for file browser

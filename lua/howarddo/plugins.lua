@@ -28,12 +28,13 @@ return {
     end,
   },
   {
+    -- theme
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
     config = function()
       require('catppuccin').setup {
-        transparent_background = true,
+        -- transparent_background = true,
       }
       vim.cmd.colorscheme 'catppuccin'
     end,
@@ -53,11 +54,6 @@ return {
     event = 'InsertEnter',
     config = function()
     end,
-  },
-  {
-    'glepnir/dashboard-nvim',
-    event = 'VimEnter',
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -194,10 +190,17 @@ return {
       require('tailwindcss-colors').setup()
     end,
   },
+  -- Telescopes and extensions
+  {
+    'nvim-telescope/telescope.nvim',
+    version = '*',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
   {
     'nvim-telescope/telescope-file-browser.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
   },
+  { 'nvim-telescope/telescope-ui-select.nvim' },
   {
     -- Fuzzy Finder Algorithm which requires local dependencies to be built.
     -- Only load if `make` is available. Make sure you have the system
@@ -209,11 +212,6 @@ return {
     cond = function()
       return vim.fn.executable 'make' == 1
     end,
-  },
-  {
-    'nvim-telescope/telescope.nvim',
-    version = '*',
-    dependencies = { 'nvim-lua/plenary.nvim' },
   },
   {
     'akinsho/toggleterm.nvim',
@@ -308,5 +306,26 @@ return {
     config = function()
       require "octo".setup()
     end
-  }
+  },
+  {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    opts = {
+      load = {
+        ["core.defaults"] = {},  -- Loads default behaviour
+        ["core.concealer"] = {}, -- Adds pretty icons to your documents
+        ["core.dirman"] = {      -- Manages Neorg workspaces
+          config = {
+            workspaces = {
+              notes = "~/Sync/neorg/notes",
+            },
+          },
+        },
+      },
+    },
+    dependencies = { { "nvim-lua/plenary.nvim" } },
+  },
+  {
+    'Shatur/neovim-session-manager'
+  },
 }
