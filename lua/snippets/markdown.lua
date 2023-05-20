@@ -1,5 +1,5 @@
 local ls = require 'luasnip'
-local utils = require 'howarddo.utils' --{{{
+local utils = require 'utils' --{{{
 local s = ls.s
 local i = ls.i
 local t = ls.t
@@ -15,11 +15,40 @@ local rep = require('luasnip.extras').rep
 local snippets, autosnippets = {}, {} --}}}
 
 local group = vim.api.nvim_create_augroup('<language> Snippets', { clear = true })
-local file_pattern = '*.<language>'
+local file_pattern = '*.md'
 
 local cs = utils.snippetCreateFnBuilder(snippets, autosnippets, file_pattern, group)
 
 -- Start Refactoring --
+
+cs(
+  { trig = 'figure' },
+  fmt(
+    [[
+{{{{< figure align="center" src="{}" link="{}" title="{}" caption="{}" >}}}}
+{}
+    ]],
+    {
+      i(1),
+      i(2),
+      i(3),
+      i(4),
+      i(5)
+    }
+  )
+)
+
+cs(
+  { trig = 'link'},
+  fmt([[
+  [{}]({}) {}
+  ]],
+    {
+      i(1),
+      i(2),
+      i(3),
+    })
+)
 
 -- End Refactoring --
 

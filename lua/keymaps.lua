@@ -1,5 +1,5 @@
 -- KEYMAPS
-local map = require('howarddo.utils').map
+local map = require('utils').map
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })

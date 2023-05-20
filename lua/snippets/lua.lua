@@ -1,5 +1,5 @@
 local ls = require 'luasnip'
-local utils = require 'howarddo.utils' --{{{
+local utils = require 'utils' --{{{
 local s = ls.s
 local i = ls.i
 local t = ls.t

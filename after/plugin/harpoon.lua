@@ -4,7 +4,7 @@ end
 
 local mark = require 'harpoon.mark'
 local ui = require 'harpoon.ui'
-local map = require('howarddo.utils').map
+local map = require('utils').map
 
 map('n', '<leader>ha', mark.add_file, { desc = 'add file to harpoon' })
 map('n', '<leader>hh', ui.toggle_quick_menu, { desc = 'toggle harpoon quick menu' })

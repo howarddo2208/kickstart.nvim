@@ -64,7 +64,7 @@ plugins.vifm = function()
   return createTerminal(commands)
 end
 
-local keys = require("howarddo.keybindings").toggletermKeys(plugins)
+local keys = require("keybindings").toggletermKeys(plugins)
 toggleterm.setup({
   -- on_close          = function() end
   -- on_stdout         = function() end

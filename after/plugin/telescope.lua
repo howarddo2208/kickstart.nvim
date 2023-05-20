@@ -6,7 +6,7 @@ end
 local telescope = require 'telescope'
 local telescopeConfig = require 'telescope.config'
 local actions = require 'telescope.actions'
-local map = require('howarddo.utils').map
+local map = require('utils').map
 
 local fb_actions = require('telescope').extensions.file_browser.actions
 

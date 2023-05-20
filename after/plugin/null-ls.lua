@@ -24,5 +24,5 @@ null_ls.setup {
   },
 }
 
-local map = require('howarddo.utils').map
+local map = require('utils').map
 map('n', '<leader>ln', '<cmd>NullLsInfo<CR>', { desc = 'Null LS Info' })

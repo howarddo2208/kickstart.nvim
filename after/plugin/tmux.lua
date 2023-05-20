@@ -1,4 +1,4 @@
-local map = require('howarddo.utils').map
+local map = require('utils').map
 -- Move to window using the <ctrl> hjkl keys
 map('n', '<C-h>', '<cmd>lua require("tmux").move_left()<cr>', { desc = 'Go to left window' })
 map('n', '<C-j>', '<cmd>lua require("tmux").move_bottom()<cr>', { desc = 'Go to lower window' })

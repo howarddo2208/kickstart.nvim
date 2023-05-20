@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ 'User' }, {
   end,
 })
 
-local map = require('howarddo.utils').map
+local map = require('utils').map
 
 map('n', '<leader>ps', ':SessionManager load_session<CR>', { desc = 'Switch project sessions' })
 map('n', '<leader>pa', ':SessionManager save_current_session<CR>', { desc = 'Add current project session' })
