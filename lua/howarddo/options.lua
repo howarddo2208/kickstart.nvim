@@ -76,3 +76,8 @@ vim.o.autowriteall = true
 
 -- load ftplugin
 -- vim.api.nvim_command('filetype plugin indent on')
+
+-- fold setup
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevelstart = 99
